@@ -1,0 +1,1072 @@
+{
+  swagger: "2.0",
+  info: {
+    version: "v.2.0.0",
+    title: "Smart BI",
+    description: "`File System SDK` : описание JSON моделей конифгурации файловой системы."
+  },
+  paths: {},
+  definitions: {
+    DataSourceProvider: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        }
+      }
+    },
+    DataSourceConnection: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+        "connectionString"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        connectionString: {
+          type: "string",
+          example: "Data Source=dev-db\\MSSQL2016;Initial Catalog=SmartBI_trunk_configuration;User Id=****; Password=****;"
+        }
+      }
+    },
+    DataSourceQuery: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        usedForRightsFilter: {
+          type: "boolean",
+          default: false
+        },
+        columns: {
+          type: "array",
+          default: [],
+          items: {
+            $ref: "#/definitions/DataSourceColumn"
+          }
+        },
+        parameters: {
+          type: "array",
+          default: [],
+          items: {
+            $ref: "#/definitions/DataSourceParameter"
+          }
+        }
+      }
+    },
+    DataSourceColumn: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string",
+          example: "Найменування",
+          description: "локализируемое название колонки запроса, которое используется для подписи колонки списка, секции"
+        },
+        isVisible: {
+          type: "boolean",
+          default: true
+        },
+        isFileContent: {
+          type: "boolean",
+          default: false
+        },
+        referenceKeyCode: {
+          type: "string",
+          description: "ссылка на другую колонку, используется для клика по ячейке в реестре",
+          default: null
+        },
+        referenceSectionCode: {
+          type: "string",
+          description: "код секции, используется в реестре для перехода в секцию по клику по ячейке",
+          default: null
+        },
+        isPrimaryKey: {
+          type: "boolean",
+          description: "признак, который говорит о том, что колонка представляет первичный ключ",
+          default: false
+        },
+        sqlName: {
+          type: "string",
+          description: "используется для построения фильтров по колонке - левая часть",
+          default: null,
+          example: "@Name"
+        },
+        filterParameterCode: {
+          type: "string",
+          default: null
+        }
+      }
+    },
+    DataSourceParameter: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        typeCode: {
+          type: "string",
+          description: "тип данных, к которому будет приведено значение, переданное из клиента/АПИ",
+          default: "Text",
+          enum: [
+            "Text",
+            "Integer",
+            "Boolean",
+            "DateTime",
+            "Date",
+            "Time",
+            "Decimal"
+          ]
+        },
+        isPrimaryKey: {
+          type: "boolean",
+          description: "признак, который говорит о том, что параметр используется для заполнения колонки, которая представляет первичный ключ",
+          default: false
+        },
+        isPageOffsetRows: {
+          type: "boolean",
+          description: "признак, который говорит о том, что параметр используется постраничности, а именно для указания смещения от первой страницы",
+          default: false
+        },
+        isPageLimitRows: {
+          type: "boolean",
+          description: "признак, который говорит о том, что параметр используется постраничности, а именно для указания размера страницы",
+          default: false
+        },
+        rightsFilterQueryCode: {
+          type: "string",
+          default: null
+        }
+      }
+    },
+    Section: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+        "selectRowsQueryCode"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        formPageCode: {
+          type: "string",
+          default: null
+        },
+        selectRowsQueryCode: {
+          type: "string",
+        },
+        selectRowQueryCode: {
+          type: "string",
+          default: null
+        },
+        insertQueryCode: {
+          type: "string",
+          default: null
+        },
+        updateQueryCode: {
+          type: "string",
+          default: null
+        },
+        deleteQueryCode: {
+          type: "string",
+          default: null
+        },
+        visible: {
+          type: "boolean",
+          default: false,
+          description: "отображать ли данную секцию в разделе Секций"
+        }
+      }
+    },
+    Slider: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+        "dashboardPages"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        interval: {
+          type: "integer",
+          default: 5000,
+          description: "значение в мс перехода на следующую страницу"
+        },
+        dashboardPages: {
+          type: "array",
+          default: [],
+          description: "массив дашбордов которые входят в данный слайдер",
+          items: {
+            type: "object",
+            required: [
+              "dashboardPageCode"
+            ],
+            properties: {
+              dashboardPageCode: {
+                type: "string"
+              },
+              timeout: {
+                type: "integer",
+                default: 0,
+                description: "значение в мс задержки перехода на следующую страницу"
+              },
+              position: {
+                type: "integer",
+                default: 1
+              }
+            }
+          }
+        }
+      }
+    },
+    DashboardGroup: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        icon: {
+          type: "string",
+          description: "иконка с библиотеки Material Icons (https://material.io/tools/icons)",
+          example: "home",
+          default: null
+        },
+        iconColor: {
+          type: "string",
+          example: "green",
+          default: null
+        },
+        position: {
+          type: "integer",
+          default: 1
+        }
+      }
+    },
+    DashboardPage: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        position: {
+          type: "integer",
+          default: 1
+        },
+        visible: {
+          type: boolean,
+          default: false,
+          description: "отображать ли страницу в списке"
+        },
+        draft: {
+          type: boolean,
+          default: false,
+          description: "указывает, что страница на данный момент является черновиком"
+        },
+        isAnonymousAccess: {
+          type: boolean,
+          default: false,
+          description: "указывает, что на страницу можно зайти не залогиненому пользователю"
+        },
+        template: {
+          type: boolean,
+          default: false
+        },
+        description: {
+          type: "string",
+          default: null,
+          description: "добавляет в списке страницу к данной странице иконку (I) с возможностью нажать и посмотреть описание"
+        },
+        descriptionUrl: {
+          type: "string",
+          default: null,
+          description: "добавляет к описанию странице ссылку"
+        }
+      }
+    },
+    WidgetGroup: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        icon: {
+          type: "string",
+          description: "иконка с библиотеки Material Icons (https://material.io/tools/icons)",
+          example: "home",
+          default: null
+        },
+        iconColor: {
+          type: "string",
+          example: "green",
+          default: null
+        },
+        position: {
+          type: "integer",
+          default: 1
+        }
+      }
+    },
+    WidgetTemplate: {
+      type: "object",
+      description: "виджет шаблон для повторного переиспользования",
+      required: [
+        "code",
+        "name",
+        "type"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        type: {
+          type: "string",
+          default: "ChartWidgetComponent",
+          enum: [
+            "ChartWidgetComponent",
+            "TableWidgetComponent",
+            "CustomWidgetComponent",
+            "HightMapWidgetComponent",
+            "NewsWidgetComponent",
+            "GoogleMapWidgetComponent",
+            "LeafletMapWidgetComponent",
+            "PivotGridWidgetComponent",
+            "DataGridWidgetComponent",
+            "TreeListWidgetComponent",
+            "NativeDataGridWidgetComponent"
+          ]
+        },
+        description: {
+          type: "string",
+          default: null,
+          description: "формальное описание для разработчика того, что делает данный виджет"
+        },
+        position: {
+          type: "integer",
+          default: 1
+        }
+      }
+    },
+    Filter: {
+      type: "object",
+      required: [
+        "name",
+        "owner",
+        "type"
+      ],
+      properties: {
+        name: {
+          type: "string"
+        },
+        owner: {
+          type: "string",
+          description: "название фильтра"
+        },
+        type: {
+          type: "string",
+          default: "SelectFilterComponent",
+          enum: [
+            "SelectFilterComponent",
+            "DatepickerFilterComponent",
+            "CheckboxFilterComponent",
+            "MultiSelectFilterComponent",
+            "InputFilterComponent",
+            "CalendarFilterComponent"
+          ]
+        },
+        isMain: {
+          type: boolean,
+          default: false,
+          description: "указывает, что фильтр будет находиться в заголовке страницы"
+        }
+      }
+    },
+    FormPage: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        isPrintable: {
+          type: boolean,
+          default: false,
+          description: "указывает, что у данной формы появится иконка печати и ее можно будет распечатать"
+        },
+        config: {
+          type: "object",
+          default: null,
+          description: "описание конфигурации карточки",
+          properties: {
+            fieldGroups: {
+              type: "array",
+              description: "группы полей на карточке",
+              default: [],
+              items: {
+                $ref: "#/definitions/FormPageFieldGroup"
+              }
+            },
+            defaultFields: {
+              type: "array",
+              description: "поля на карточке которые задаются по умолчанию",
+              default: [],
+              items: {
+                 type: "object",
+                 required: [
+                  "code",
+                  "keyValue",
+                  "displayValue"
+                ],
+                properties: {
+                  code: {
+                    type: "string",
+                    description: "Код поля на форме",
+                    example: "Id"
+                  },
+                  keyValue: {
+                    type: "string",
+                    description: "Код поля на родительской форме (с которой пришли)",
+                    example: "ObjectId"
+                  },
+                  displayValue: {
+                    type: "string",
+                    description: "Код поля на родительской форме (с которой пришли)",
+                    example: "ObjectName"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    FormPageFieldGroup: {
+      type: "object",
+      required: [
+        "code",
+        "name"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        position: {
+          type: "integer",
+          default: 1
+        },
+        expand: {
+          type: "boolean",
+          default: false,
+          description: "задает состояние развернута ли данная группа по умолчанию"
+        },
+        fields: {
+          type: "array",
+          description: "поля в группе",
+          default: [],
+          items: {
+            $ref: "#/definitions/FormPageField"
+          }
+        }
+      }
+    },
+    FormPageField: {
+      type: "object",
+      required: [
+        "code",
+        "placeholder",
+        "type"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        placeholder: {
+          type: "string"
+        },
+        type: {
+          type: "string",
+          default: "text",
+          enum: [
+            "text",
+          	"password",
+          	"email",
+          	"number",
+          	"textarea",
+          	"checkbox",
+          	"radio",
+          	"date",
+          	"time",
+          	"date-time",
+          	"lookup",
+          	"image",
+          	"file",
+          	"select",
+          	"button"
+          ]
+        },
+        position: {
+          type: "integer",
+          default: 1
+        },
+        hidden: {
+          type: boolean,
+          default: false,
+          description: "указывает спрятать ли поле (не отображать)"
+        },
+        fullScreen: {
+          type: boolean,
+          default: false,
+          description: "указывает, что поле будет на всю ширину группы"
+        },
+        required: {
+          type: boolean,
+          default: false
+        },
+        width: {
+          type: "string",
+          default: "50%"
+        },
+        value: {
+          type: "string",
+          description: "Используеться для списков и лукапов",
+          default: null
+        },
+        keyValue: {
+          type: "string",
+          description: "используеться для списков и лукапов",
+          default: null
+        },
+        file: {
+          type: "string",
+          format: "binary", 
+          description: "используеться для файла",
+          default: null
+        },
+        fileNameColumnCode: {
+          type: "string",
+          description: "используеться для файла",
+          default: null
+        },
+        icon: {
+          type: "string",
+          description: "используеться для полей с иконками, иконка с библиотеки Material Icons (https://material.io/tools/icons)",
+          default: null
+        },
+        iconHint: {
+          type: "string",
+          default: null
+        },
+        height: {
+          type: "string",
+          description: "используеться для поля картинки",
+          default: null,
+          example: "200px"
+        },
+        patternType: {
+          type: "string",
+          default: "letters",
+          enum: [
+            "letters",
+          	"numbers",
+          	"numbersWithPoint",
+          	"custom"
+          ]
+        },
+        pattern: {
+          type: "string",
+          default: null,
+          description: "используеться при кастомной патерне https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation"
+        },
+        patternDescription: {
+          type: "string",
+          default: null,
+          example: "данное поле принимает только цифры"
+        },
+        minlength: {
+          type: "integer",
+          default: null
+        },
+        maxlength: {
+          type: "integer",
+          default: null
+        },
+        lookupType: {
+          type: "string",
+          default: "list",
+          enum: [
+            "list",
+          	"tree"
+          ]
+        },
+        queryListCode: {
+          type: "string",
+          default: null,
+          description: "используеться для списков и лукапов"
+        },
+        listKeyColumn: {
+          type: "string",
+          default: null,
+          description: "используеться для списков и лукапов"
+        },
+        listDisplayColumn: {
+          type: "string",
+          default: null,
+          description: "используеться для списков и лукапов"
+        },
+        filterList: {
+          type: "array",
+          default: [],
+          description: "используеться для списков и лукапов",
+          items: {
+            type: "object",
+            required: [
+              "parameterId",
+              "parentFieldCode"
+            ],
+            properties: {
+              parameterId: {
+                type: "string",
+                description: "код параметра с запроса с перфиксом @",
+                example: "@RecordId"
+              },
+              parentFieldCode: {
+                type: "string",
+                description: "код поля с формы, по которому будет фильтрация",
+                example: "Person"
+              }
+            }
+          }
+        },
+        listParentIdColumn: {
+          type: "string",
+          default: null,
+          description: "используеться при лукапа древовидного вида"
+        },
+        querySearchListCode: {
+          type: "string",
+          default: null,
+          description: "используеться для поиска в лукапе древовидного вида"
+        },
+        searchListKeyColumn: {
+          type: "string",
+          default: null,
+          description: "используеться при поиске в лукапе древовидного вида"
+        },
+        searchListDisplayColumn: {
+          type: "string",
+          default: null,
+          description: "используеться при поиске в лукапе древовидного вида"
+        },
+        pathColumn: {
+          type: "string",
+          default: null,
+          description: "столбец пути иерархии, используеться при поиске в лукапе древовидного вида"
+        },
+        radioItems: {
+          type: "array",
+          description: "используеться при поле radio",
+          default: [],
+          items: {
+            required: [
+              "value",
+              "viewValue"
+            ],
+            properties: {
+              value: {
+                type: "string"
+              },
+              viewValue: {
+                type: "string"
+              }
+            }
+          }
+        },
+        rows: {
+          type: "integer",
+          description: "используеться при поле textarea, отвечает за высоту строк",
+          default: 3
+        }
+      }
+    },
+    FormDetail: {
+      type: "object",
+      required: [
+        "code",
+        "name",
+        "type",
+        "formOwnerCode"
+      ],
+      properties: {
+        code: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        type: {
+          type: "string",
+          default: "Simple",
+          enum: [
+            "Simple",
+            "Section",
+            "File"
+          ]
+        },
+        position: {
+          type: "integer",
+          default: 1
+        },
+        printType: {
+          type: "string",
+          default: "None",
+          enum: [
+            "None",
+            "Table",
+            "Card"
+          ]
+        },
+        expand: {
+          type: boolean,
+          default: false,
+          description: "задает состояние развернута ли данная деталь по умолчанию"
+        },
+        withClosing: {
+          type: boolean,
+          default: false,
+          description: "добавляет к детали иконку крестика с возможностью закрыть деталь"
+        },
+        formOwnerCode: {
+          type: "string",
+          description: "code of FormPage",
+          default: null
+        },
+        sectionCode: {
+          type: "string",
+          description: "используеться при типе Section",
+          default: null
+        },
+        selectRowsQueryCode: {
+          type: "string",
+          default: null
+        },
+        selectRowQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple и File",
+          default: null
+        },
+        insertQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple и File",
+          default: null
+        },
+        updateQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple",
+          default: null
+        },
+        deleteQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple и File",
+          default: null
+        },
+        formPageCode: {
+          type: "string",
+          description: "используеться при типе Simple и File",
+          default: null
+        },
+        addType: {
+          type: "string",
+          default: "General",
+          description: "используеться при типе Simple",
+          enum: [
+            "General",
+            "Lookup",
+            "TreeLookup"
+          ]
+        },
+        addColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления Lookup или TreeLookup, колонка в которую будут добавлены записи (масивом айдишников)",
+          default: null
+        },
+        addLookupQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления Lookup",
+          default: null
+        },
+        addLookupColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления Lookup",
+          default: null
+        },
+        addLookupPathColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления Lookup",
+          default: null
+        },
+        addTreeLookupQueryCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления TreeLookup",
+          default: null
+        },
+        addTreeLookupColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления TreeLookup",
+          default: null
+        },
+        addTreeLookupDisplayColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления TreeLookup",
+          default: null
+        },
+        addTreeLookupParentColumnCode: {
+          type: "string",
+          description: "используеться при типе Simple и типе добавления TreeLookup",
+          default: null
+        },
+        filters: {
+          type: "array",
+          default: [],
+          items: {
+            type: "object",
+            required: [
+              "parameterCode",
+              "formPageFieldName"
+            ],
+            properties: {
+              parameterCode: {
+                type: "string",
+                description: "код параметра запроса с префиксом @",
+                example: "@RecordId"
+              },
+              formPageFieldName: {
+                type: "string",
+                description: "название поля с формы ввода, по которому будет фильтрация",
+                example: "Id"
+              }
+            }
+          }
+        },
+        addLookupFilters: {
+          type: "array",
+          description: "используеться при типе Simple и типе добавления Lookup или TreeLookup",
+          items: {
+            type: "object",
+            default: [],
+            required: [
+              "parameterCode",
+              "formPageFieldName"
+            ],
+            properties: {
+              parameterCode: {
+                type: "string",
+                description: "код параметра запроса с префиксом @",
+                example: "@RecordId"
+              },
+              formPageFieldName: {
+                type: "string",
+                description: "название поля с формы ввода, по которому будет фильтрация",
+                example: "Id"
+              }
+            }
+          }
+        }
+      }
+    },
+    DashboardPageLayout: {
+      type: "object",
+      required: [
+        "rootContainer"
+      ],
+      properties: {
+        rootContainer: {
+          type: "object",
+          description: "свойства контейнера используют обычный CSS",
+          properties: {
+            id: {
+              type: "string",
+              description: "айдишник контейнера, добавляеться для дальнейшей работы со стилями и js",
+              example: "MainContainer",
+              default: null
+            },
+            width: {
+              type: "string",
+              example: ["auto", "300px", "calc(50% - 10px)", "50vw", "25%"],
+              default: "auto"
+            },
+            minWidth: {
+              type: "string",
+              example: "500px",
+              default: "100px"
+            },
+            height: {
+              type: "string",
+              example: "40vh",
+              default: "calc(100% - 10px)"
+            },
+            minHeight: {
+              type: "string",
+              example: "450px",
+              default: "100px"
+            },
+            margin: {
+              type: "string",
+              example: "0 10px",
+              default: "0 5px 10px"
+            },
+            flexWrap: {
+              type: "string",
+              example: "wrap",
+              default: "wrap"
+            },
+            flexDirection: {
+              type: "string",
+              example: "row",
+              default: "row"
+            },
+            flexGrow: {
+              type: "integer",
+              example: 1,
+              default: 1
+            },
+            alignSelf: {
+              type: "string",
+              example: "auto",
+              default: "auto"
+            },
+            border: {
+              type: "string",
+              example: "1px solid #999",
+              default: "none"
+            },
+            order: {
+              type: "integer",
+              example: 1,
+              default: 1
+            },
+            backgroundColor: {
+              type: "string",
+              example: "#eee",
+              default: "white"
+            },
+            children: {
+              type: "array",
+              description: "контейнер может содержать массив вложенных контейнеров либо один виджет",
+              default: [],
+              items: {
+                type: "object",
+                description: "описание виджета который будет в этом контейнере",
+                required: [
+                  "code",
+                  "name",
+                  "type"
+                ],
+                properties: {
+                  name: {
+                    type: "string"
+                  },
+                  code: {
+                    type: "string"
+                  },
+                  type: {
+                    type: "string",
+                    default: "ChartWidgetComponent",
+                    enum: [
+                      "ChartWidgetComponent",
+                      "TableWidgetComponent",
+                      "CustomWidgetComponent",
+                      "HightMapWidgetComponent",
+                      "NewsWidgetComponent",
+                      "GoogleMapWidgetComponent",
+                      "LeafletMapWidgetComponent",
+                      "PivotGridWidgetComponent",
+                      "DataGridWidgetComponent",
+                      "TreeListWidgetComponent",
+                      "NativeDataGridWidgetComponent"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

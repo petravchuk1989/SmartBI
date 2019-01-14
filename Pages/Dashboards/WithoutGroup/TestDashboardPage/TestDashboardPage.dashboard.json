@@ -1,0 +1,15 @@
+﻿{
+  "DesignSchema": "Свойство будет генерироваться в runtime",
+  "Layout": "Свойство будет генерироваться в runtime из файа Layout.json",
+  "Config": "Свойство будет генерироваться в runtime",
+  "Template": false,
+  "Code": "all-widgets",
+  "Name": "Все виджеты",
+  "DashboardGroupCode": "Add_GD",
+  "Visible": true,
+  "Draft": false,
+  "Position": false,
+  "Description": "",
+  "DescriptionUrl": "",
+  "IsAnonymousAccess": false
+}

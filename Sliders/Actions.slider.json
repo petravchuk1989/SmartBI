@@ -1,0 +1,17 @@
+{
+  "Code": "Actions",
+  "Name": "Деййствия",
+  "Interval": 7000,
+  "Dashboards": [
+    {
+      "Code": "DashboardCode7",
+      "Timeout": 2000,
+      "Position": 1
+    },
+    {
+      "Code": "DashboardCode8",
+      "Timeout": 400,
+      "Position": 3
+    }
+  ]
+}

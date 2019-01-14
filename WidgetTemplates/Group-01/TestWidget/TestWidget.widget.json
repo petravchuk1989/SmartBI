@@ -1,0 +1,9 @@
+﻿{
+  "Description": "",
+  "Config": "Формируется в runtime из файла TestWidget.js",
+  "Type": "ChartWidgetComponent",
+  "Position": 1,
+  "GroupCode": "Group-01",
+  "Code": "TestWidget",
+  "Name": "TestWidget"
+}

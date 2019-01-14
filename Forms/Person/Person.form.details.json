@@ -1,0 +1,51 @@
+﻿[
+    {
+      "FormOwnerCode": "Activitys",
+      "FormPageCode": "Appeals",
+      "SectionCode": "Appeals",
+      "SelectRowsQueryCode": "zx_ActivitySelectRows_WorkDetail",
+      "Position": 1,
+      "AddQueryCode": "MenuInsert",
+      "AddColumnCode": "@PersonId",
+      "Filters": [
+        {
+          "ParameterCode": "@RecordId",
+          "FormPageFieldName": "Id"
+        }
+      ],
+      "Code": "AppealInIctivity",
+      "Name": "Звернення в рамках якого виконується активність"
+    },
+    {
+      "FormOwnerCode": "Activitys",
+      "FormPageCode": "ObjectFormInActivitySection",
+      "SectionCode": "Objects",
+      "SelectRowsQueryCode": "zx_ActivityObjectSelectRows_ObjectDetail",
+      "InsertQueryCode": "zx_ActivityObjectInsertRow",
+      "UpdateQueryCode": "zx_ActivityObjectUpdateRow",
+      "DeleteQueryCode": "zx_ActivityObjectDeleteRow",
+      "SelectRowQueryCode": "zx_ActivityObjectSelectRow",
+      "Position": 3,
+      "Filters": [
+        {
+          "ParameterCode": "@RecordId",
+          "FormPageFieldName": "Id"
+        }
+      ],
+      "Code": "Objects",
+      "Name": "Об'єкти"
+    },
+    {
+    "FormOwnerCode": "Activitys",
+    "SectionCode": "Works",
+    "SelectRowsQueryCode": "WorkSelectRows_Detail",
+    "Filters": [
+                {
+                  "ParameterCode": "@ActivityId",
+                  "FormPageFieldName": "Id"
+                }
+              ],
+    "Code": "Work",
+    "Name": "Задачі"
+    }
+]

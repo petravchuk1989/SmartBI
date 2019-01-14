@@ -1,0 +1,11 @@
+{
+  "Code": "Claims",
+  "Name": "Заявки",
+  "FormPage": "ClaimForm",
+  "SelectRowsQuery": "GetAllClaims",
+  "SelectRowQuery": "GetOneClaim",
+  "InsertQuery": "InsertClaim",
+  "UpdateQuery": "UpdateClaim",
+  "DeleteQuery": "DeleteClaim",
+  "Visible": true
+}

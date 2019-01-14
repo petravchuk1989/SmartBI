@@ -1,0 +1,11 @@
+{
+  "Code": "Objects",
+  "Name": "Об'экты",
+  "FormPage": "ObjectForm",
+  "SelectRowsQuery": "GetAllObjects",
+  "SelectRowQuery": "GetOneObject",
+  "InsertQuery": "InsertObject",
+  "UpdateQuery": "UpdateObject",
+  "DeleteQuery": "DeleteObject",
+  "Visible": true
+}

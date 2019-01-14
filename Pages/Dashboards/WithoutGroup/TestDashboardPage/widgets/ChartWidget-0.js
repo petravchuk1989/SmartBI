@@ -1,0 +1,6 @@
+﻿(function() {
+    return {
+        chartType: '',
+        queryCode: ''
+    }
+})()

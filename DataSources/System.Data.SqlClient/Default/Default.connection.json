@@ -1,0 +1,4 @@
+﻿{
+  "Name": "Подключение по-умолчанию",
+  "ConnectionString": "Data Source=OSAULENKO-PC\\MSSQL2014;Initial Catalog=SmartBI_1.7;Integrated Security=true;"
+}

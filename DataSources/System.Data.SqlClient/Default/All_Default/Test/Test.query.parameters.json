@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Code": "@Id",
+    "Name": "Id",
+    "TypeCode": "integer",
+    "IsPrimaryKey": true,
+    "IsPageOffsetRows": false,
+    "IsPageLimitRows": false,
+    "RightsFilterQueryCode": null
+  },
+  {
+    "Code": "@Name",
+    "Name": "Name",
+    "TypeCode": "string",
+    "IsPrimaryKey": false,
+    "IsPageOffsetRows": false,
+    "IsPageLimitRows": false,
+    "RightsFilterQueryCode": null
+  }
+]

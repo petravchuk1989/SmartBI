@@ -1,0 +1,203 @@
+﻿{
+  "Name": "Людина",
+  "Code": "Person", 
+  "IsPrinTable": true,
+  "Config": {
+    "defaultFields": [ ],
+    "fieldGroups": [
+      {
+        "position": "2",
+        "expand": false,
+        "name": "Паспортні дані",
+        "code": "PassportData",
+        "fields": [
+          {
+            "rows": 3,
+            "position": 1,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "code": "PassNumber",
+            "placeholder": "Номер паспорту",
+            "maxlength": 20
+          },
+          {
+            "rows": 3,
+            "position": 1,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "date",
+            "code": "PassDate",
+            "placeholder": "Коли виданний"
+          },
+          {
+            "rows": 3,
+            "position": 1,
+            "fullScreen": true,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "code": "PassText",
+            "placeholder": "Ким виданий"
+          },
+          {
+            "rows": 3,
+            "position": 1,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "code": "IndCode",
+            "placeholder": "ІІН",
+            "patternType": "numbers",
+            "pattern": "^[0-9]+$",
+            "patternDescription": "Тільки цифри",
+            "minlength": 10,
+            "maxlength": 10
+          }
+        ]
+      },
+      {
+        "position": 1,
+        "expand": true,
+        "code": "Person",
+        "name": "Людина",
+        "fields": [
+          {
+            "rows": 3,
+            "position": 1,
+            "fullScreen": true,
+            "radioItems": [ ],
+            "hidden": true,
+            "type": "text",
+            "code": "PIB",
+            "placeholder": "Повне им'я",
+            "maxlength": 250,
+            "patternType": "letters",
+            "pattern": "^[a-zA-ZА-Яа-яЁёІіЄєЇї\\s]+$",
+            "patternDescription": "Тільки літери",
+            "required": false
+          },
+          {
+            "rows": 3,
+            "position": 2,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "code": "Surname",
+            "placeholder": "Прізвище",
+            "maxlength": 50,
+            "patternType": "letters",
+            "pattern": "^[a-zA-ZА-Яа-яЁёІіЄєЇї\\s]+$",
+            "patternDescription": "Тільки літери"
+          },
+          {
+            "rows": 3,
+            "position": 4,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "placeholder": "По-батькові",
+            "code": "Middle",
+            "patternType": "letters",
+            "pattern": "^[a-zA-ZА-Яа-яЁёІіЄєЇї\\s]+$",
+            "maxlength": 50,
+            "patternDescription": "Тільки літери"
+          },
+          {
+            "rows": 3,
+            "position": 3,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "text",
+            "code": "First",
+            "placeholder": "Ім'я",
+            "patternType": "letters",
+            "pattern": "^[a-zA-ZА-Яа-яЁёІіЄєЇї\\s]+$",
+            "patternDescription": "Тільки літери",
+            "maxlength": 50
+          },
+          {
+            "rows": 3,
+            "position": 5,
+            "fullScreen": false,
+            "radioItems": [
+              {
+                "value": "ч",
+                "viewValue": "ч"
+              },
+              {
+                "value": "ж",
+                "viewValue": "ж"
+              }
+            ],
+            "hidden": false,
+            "type": "radio",
+            "code": "Sex",
+            "placeholder": "Стать",
+            "patternType": "custom",
+            "pattern": "",
+            "required": true,
+            "patternDescription": "ЭТО РАДИО"
+          },
+          {
+            "rows": 3,
+            "position": 6,
+            "fullScreen": false,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "date",
+            "code": "BirthDate",
+            "placeholder": "Дата народження",
+            "patternDescription": "ЭТО ДАТА"
+          },
+          {
+            "rows": 3,
+            "position": 7,
+            "fullScreen": true,
+            "radioItems": [ ],
+            "hidden": false,
+            "type": "textarea",
+            "code": "Comment",
+            "placeholder": "Коментар",
+            "patternType": null,
+            "pattern": "",
+            "patternDescription": "ЭТО ТЕКСТ"
+          },
+          {
+            "hidden": true,
+            "fullScreen": false,
+            "required": false,
+            "position": 90,
+            "type": "number",
+            "code": "AppealPomId",
+            "placeholder": "AppealPomId"
+          },
+          {
+            "hidden": true,
+            "fullScreen": false,
+            "required": false,
+            "position": 99,
+            "type": "text",
+            "code": "AppealPomName",
+            "placeholder": "AppealPomName"
+          },
+          {
+            "hidden": true,
+            "fullScreen": false,
+            "required": false,
+            "position": 199,
+            "type": "text",
+            "code": "PersonId",
+            "placeholder": "PersonId"
+          }
+        ]
+      }
+    ]
+  }
+}

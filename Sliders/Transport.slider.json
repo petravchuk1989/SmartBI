@@ -1,0 +1,17 @@
+{
+  "Code": "Transport",
+  "Name": "Транспорт",
+  "Interval": 5000,
+  "Dashboards": [
+    {
+      "Code": "DashboardCode1",
+      "Timeout": 1000,
+      "Position": 1
+    },
+    {
+      "Code": "DashboardCode2",
+      "Timeout": 7000,
+      "Position": 2
+    }
+  ]
+}

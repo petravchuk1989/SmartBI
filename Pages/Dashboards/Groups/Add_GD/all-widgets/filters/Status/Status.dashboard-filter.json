@@ -1,0 +1,6 @@
+﻿{
+  "IsMain": false,
+  "Type": "DatepickerFilterComponent",
+  "Owner": "DateCreated",
+  "Script": "Свойство будет генерироваться в runtime"
+}

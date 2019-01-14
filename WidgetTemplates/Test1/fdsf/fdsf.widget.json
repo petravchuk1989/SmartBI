@@ -1,0 +1,11 @@
+﻿{
+  "Description": "Создано на основе виджета на дашбоарде : Rep1",
+  "Config": "Config.js",
+  "Template": true,
+  "Type": "TableWidgetComponent",
+  "Position": 1,
+  "Image": null,
+  "GroupCode": "Test1",
+  "Code": "dfsf",
+  "Name": "w1"
+}
